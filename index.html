@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calíope Candles — Próximamente</title>
+<meta name="description" content="Calíope Candles. Nuestra tienda online de velas artesanales y accesorios abre muy pronto.">
+<meta name="theme-color" content="#fffdf9">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffdf9;--fg:#2b2016;--muted:#8a7a66;--glow:255,150,60;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;overflow:hidden}
+.stage{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px}
+.ambient{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 65% 50% at 50% 38%,rgba(var(--glow),.2),transparent 70%);animation:flicker 2.6s infinite ease-in-out}
+.candle{position:relative;width:min(62vw,260px,calc(42vh*.6));aspect-ratio:3/5}
+.halo{position:absolute;left:50%;top:37%;width:170%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(var(--glow),.5) 0%,rgba(var(--glow),.15) 35%,transparent 68%);filter:blur(16px);animation:halo 1.9s infinite ease-in-out;pointer-events:none}
+canvas{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.lit{animation:flicker 2.2s infinite ease-in-out}
+.refl{animation:floor 1.9s infinite ease-in-out}
+h1{margin:22px 0 4px;font-weight:500;font-size:clamp(22px,6vw,34px);letter-spacing:.38em;padding-left:.38em;text-transform:uppercase}
+.soon{margin:0 0 8px;letter-spacing:.5em;padding-left:.5em;text-transform:uppercase;font-size:clamp(13px,3.4vw,17px);color:#b9772a;animation:breathe 4s infinite ease-in-out}
+.sub{color:var(--muted);font-size:clamp(14px,3.5vw,18px);margin:0;line-height:1.5}
+.ember{position:fixed;bottom:-10px;width:3px;height:3px;border-radius:50%;background:rgb(255,140,40);box-shadow:0 0 8px 2px rgba(255,120,30,.6);opacity:0;animation:rise linear infinite;pointer-events:none}
+@keyframes halo{0%,100%{opacity:.85;transform:translate(-50%,-50%) scale(1)}20%{opacity:1;transform:translate(-50%,-52%) scale(1.06)}45%{opacity:.68;transform:translate(-50%,-49%) scale(.95)}70%{opacity:.95;transform:translate(-50%,-51%) scale(1.04)}}
+@keyframes flicker{0%,100%{opacity:.82}15%{opacity:1}30%{opacity:.66}50%{opacity:.96}65%{opacity:.72}85%{opacity:1}}
+@keyframes floor{0%,100%{opacity:.7}30%{opacity:1}60%{opacity:.55}80%{opacity:.9}}
+@keyframes breathe{0%,100%{opacity:.65}50%{opacity:1}}
+@keyframes lick{0%,100%{transform:scale(1,1) skewX(0)}20%{transform:scale(.94,1.08) skewX(3deg)}45%{transform:scale(1.04,.94) skewX(-2deg)}70%{transform:scale(.97,1.05) skewX(2deg)}}
+@keyframes rise{0%{transform:translate(0,0);opacity:0}10%{opacity:.9}100%{transform:translate(var(--dx),-70vh);opacity:0}}
+#fb{transform-box:fill-box;transform-origin:50% 100%;animation:lick 2s infinite ease-in-out}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.ember{display:none}}
+</style></head>
+<body><div class="stage">
+<div class="ambient"></div>
+<div class="candle">
+<div class="halo"></div>
+<svg viewBox="0 0 300 500" role="img" aria-label="Vela encendida">
+<defs>
+<linearGradient id="wax" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c4ac88"/><stop offset=".3" stop-color="#e6d6b8"/><stop offset=".55" stop-color="#f7ecd5"/><stop offset="1" stop-color="#b89f7a"/></linearGradient>
+<radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd59a"/><stop offset="1" stop-color="#d9b98a"/></radialGradient>
+<radialGradient id="light" cx=".5" cy="0" r=".9"><stop offset="0" stop-color="#ffb35c" stop-opacity=".75"/><stop offset=".6" stop-color="#ff8a2a" stop-opacity=".18"/><stop offset="1" stop-color="#ff8a2a" stop-opacity="0"/></radialGradient>
+<radialGradient id="fl" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffb35c" stop-opacity=".55"/><stop offset="1" stop-color="#ffb35c" stop-opacity="0"/></radialGradient>
+<linearGradient id="plate" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9aa68"/><stop offset="1" stop-color="#7a6030"/></linearGradient>
+<linearGradient id="fg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff9a3c"/><stop offset=".5" stop-color="#ffd28a"/><stop offset="1" stop-color="#fff4dc"/></linearGradient>
+<clipPath id="body"><path d="M75 300H225V452Q225 468 150 468Q75 468 75 452Z"/></clipPath>
+</defs>
+<ellipse class="refl" cx="150" cy="478" rx="150" ry="22" fill="url(#fl)"/>
+<ellipse cx="150" cy="470" rx="112" ry="14" fill="url(#plate)"/>
+<ellipse cx="150" cy="466" rx="104" ry="10" fill="#8a7040" opacity=".55"/>
+<path d="M75 300H225V452Q225 468 150 468Q75 468 75 452Z" fill="url(#wax)"/>
+<path d="M203 306V346a8 8 0 0 0 16 0V306Z" fill="#f3e6cb"/>
+<path d="M92 306V332a6.5 6.5 0 0 0 13 0V306Z" fill="#eadcbf"/>
+<g clip-path="url(#body)"><rect class="lit" x="75" y="300" width="150" height="170" fill="url(#light)"/></g>
+<ellipse cx="150" cy="300" rx="75" ry="14" fill="#f2e3c4"/>
+<ellipse class="lit" cx="150" cy="301" rx="62" ry="10" fill="url(#pool)"/>
+<path d="M150 302Q147 290 152 276" stroke="#1a130d" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+<circle class="lit" cx="152" cy="277" r="3" fill="#ff7a1a"/>
+<path id="fb" d="M152 280C140 262 138 238 152 204C166 238 164 262 152 280Z" fill="url(#fg)" style="display:none"/>
+</svg>
+<canvas id="fire"></canvas>
+</div>
+<h1>Calíope Candles</h1>
+<p class="soon">Próximamente</p>
+<p class="sub">Nuestra tienda online abre muy pronto.</p>
+</div>
+<script>
+for(var i=0;i<14;i++){var e=document.createElement('span');e.className='ember';
+e.style.left=(35+Math.random()*30)+'vw';e.style.setProperty('--dx',(Math.random()*80-40)+'px');
+e.style.animationDuration=(6+Math.random()*6)+'s';e.style.animationDelay=(Math.random()*8)+'s';
+document.body.appendChild(e);}
+(function(){
+var c=document.getElementById('fire'),fb=document.getElementById('fb'),gl=c.getContext('webgl',{premultipliedAlpha:true,alpha:true});
+if(!gl){fb.style.display='';return;}
+var vs='attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+var fs='precision highp float;uniform float t;uniform vec2 res;'+
+'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}'+
+'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}'+
+'float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p*=2.03;a*=.5;}return v;}'+
+'void main(){vec2 p=gl_FragCoord.xy/res;vec2 b=vec2(.5,.436);float H=.4;'+
+'float ty=(p.y-b.y)/H;if(ty<-.05||ty>1.05){gl_FragColor=vec4(0.);return;}'+
+'float tt=clamp(ty,0.,1.);'+
+'float n1=fbm(vec2(p.x*6.,p.y*4.-t*2.1));float n2=fbm(vec2(p.x*12.+3.,p.y*8.-t*3.6));'+
+'float sw=sin(t*1.6+tt*3.)*.03+sin(t*3.3+1.)*.012+(fbm(vec2(t*.9,1.))-.5)*.08;'+
+'float dx=p.x-b.x-.02*pow(tt,1.6)-sw*tt*tt*1.6-(n1-.5)*.09*tt-(n2-.5)*.04*tt;'+
+'float w=pow(tt,.4)*pow(1.-tt,1.2)*2.*.115*(.94+.1*n(vec2(t*5.,0.)));'+
+'float d=abs(dx)/max(w,.002);float e=d+(n2-.5)*.4*tt;'+
+'float I=smoothstep(1.,0.,e);I*=smoothstep(-.04,.05,ty);'+
+'vec3 col=mix(vec3(1.,.3,.04),vec3(1.,.6,.1),smoothstep(.15,.65,I));'+
+'col=mix(col,vec3(1.,.9,.55),smoothstep(.6,1.,I)*(1.-.55*tt));'+
+'col=mix(col,vec3(.25,.4,1.),smoothstep(.2,0.,tt)*smoothstep(0.,.5,I)*.75);'+
+'float a=I*(1.-.2*tt)*(.93+.07*n(vec2(t*9.,2.)));'+
+'gl_FragColor=vec4(col*a,a);}';
+function sh(t,s){var o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return gl.getShaderParameter(o,gl.COMPILE_STATUS)?o:null;}
+var v=sh(gl.VERTEX_SHADER,vs),f=sh(gl.FRAGMENT_SHADER,fs);if(!v||!f){fb.style.display='';return;}
+var pr=gl.createProgram();gl.attachShader(pr,v);gl.attachShader(pr,f);gl.linkProgram(pr);
+if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){fb.style.display='';return;}
+gl.useProgram(pr);
+var bf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,bf);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+var loc=gl.getAttribLocation(pr,'a');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+var ut=gl.getUniformLocation(pr,'t'),ur=gl.getUniformLocation(pr,'res');
+var still=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+function size(){var d=Math.min(window.devicePixelRatio||1,2),r=c.getBoundingClientRect();
+c.width=Math.max(2,r.width*d);c.height=Math.max(2,r.height*d);gl.viewport(0,0,c.width,c.height);gl.uniform2f(ur,c.width,c.height);}
+size();window.addEventListener('resize',size);
+function draw(ms){gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.uniform1f(ut,ms/1000);gl.drawArrays(gl.TRIANGLE_STRIP,0,4);if(!still)requestAnimationFrame(draw);}
+requestAnimationFrame(draw);
+})();
+</script>
+</body></html>
